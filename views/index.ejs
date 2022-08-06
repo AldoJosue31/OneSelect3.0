@@ -1,0 +1,120 @@
+<%- include("template/head", {tituloweb: "pagina de Inicio"}) %>
+<%- include("template/sidebar") %>
+<div class="container bg-dark text-light text-center" style="margin-left: 60px;">
+    <div class="row">
+        <div class="col">
+            <form id="frmNuevoRegistro" class="border border-light p-4">
+              <button class="btn float-end text-light" onclick="dividirIndex()"><i class='bx bx-windows'></i></button>
+                <p class="h3 mb-4 text-left">Nueva orden</p>
+
+                <input type="text" id="nombres" class="form-control mb-4 bg-dark text-light" placeholder="Nombres" required>
+
+                <input type="text" id="apellidos" class="form-control mb-4 bg-dark text-light focus-light" placeholder="Apellidos" required> 
+
+                <div class="input-group mb-3">
+                  <input id="orden" type="text" class="form-control mb-4 bg-dark text-light" placeholder="Orden" aria-label="Recipient's username" aria-describedby="basic-addon2" required readonly>
+                  <div class="input-group-append" style="margin-left: 10px;">
+                    <button id="reiniciar" class="btn btn-outline-light" type="button" onclick="gestorOrdenes.reiniciarForm()">Eliminar</button>
+                  </div>
+                </div>
+                
+                <div class=" bg-dark border border-light border-4 border-bottom-0 h-100 rounded" style="width: 25vh; position: fixed ;bottom: -3%; right: -20px; z-index: 20;">
+                  <div style="height: 85%; overflow: auto;">
+
+                    <div class="mt-4  bg-dark text-light border border-2 border-light  border-start-0  border-stop-0"">
+                      <div class="row g-0">
+                        <div class="col border-end">
+                          <div class="d-grid gap-2">
+                            <button class="btn btn-dark btn-sm" type="button">+</button>
+                            <button class="btn btn-dark btn-sm" type="button">-</button>
+                          </div>
+                      </div>
+                      <div class="container col-8">
+                        Cerveza Michelov Ultra 
+                      </div>
+                      <button class="col md-1 bg-dark text-light">
+                        X
+                      </button>
+                      </div>
+                    </div>
+
+                    <div class="mt-4  bg-dark text-light border border-2 border-light  border-start-0  border-stop-0"">
+                      <div class="row g-0">
+                        <div class="col border-end">
+                          <div class="d-grid gap-2">
+                            <button class="btn btn-dark btn-sm" type="button">+</button>
+                            <button class="btn btn-dark btn-sm" type="button">-</button>
+                          </div>
+                      </div>
+                      <div class="container col-8">
+                        Corona Xtra
+                      </div>
+                      <button class="col md-1 bg-dark text-light">
+                        X
+                      </button>
+                      </div>
+                    </div>
+
+
+
+
+
+
+
+                    
+
+
+
+                  </div>
+                  <div class="modal-header text-center align-middle order border-light border-4 border-top w-100" >
+                    <h6 class="modal-title w-100">Total a pagar </h6>
+                    <div class="input-group mb-3 text-center mt-2 d-flex justify-content-center">
+                      <span class="input-group-text bg-dark text-light">$</span>
+                      <span id="total" class="input-group-text bg-dark text-light">0</span>
+                    </div>
+                  </div>
+                  <br>
+
+              </div>
+
+               <!--  <div class="container bg-dark border border-light border-4 border-bottom-0 h-25" style="width: 25vh; position: fixed ;bottom: 0px; right: 20px; z-index: 20;">
+                  <div class="modal-header">
+                    <h6 class="modal-title">Total a pagar</h6>
+                  </div>
+                  <br>
+                <div class="input-group mb-3 text-center mt-2 d-flex justify-content-center">
+                  <span class="input-group-text bg-dark text-light">$</span>
+                  <span id="total" class="input-group-text bg-dark text-light">0</span>
+                </div>
+              </div> -->
+
+
+
+                <div class="container-md">
+                  <div id="SecProductos" class="row row-cols-3"></div>
+                </div>
+                <button id="btnCrearRegistro" class="btn w-50 btn-success btn-block my-4" type="submit">Crear Orden</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+      
+</div>
+<div class="toast" id="EpicToast" role="alert" aria-live="assertive" aria-atomic="true" style="position: absolute; top: 2px; right: 10px;">
+
+  
+  <div class="toast-body bg-dark text-light border border-light">
+      La orden se genero con exito!
+  </div>
+</div>
+<form id="frmNuevoProducto"></form>
+
+                     
+</div>
+
+
+
+
+
+<%- include("template/footer") %>
