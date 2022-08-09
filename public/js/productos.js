@@ -57,7 +57,7 @@ let dba = new Datastore({
 // end data base
 
 //set option notify
-var option = 
+const option = 
 {
     animation : true,
     autohide : true,
@@ -107,17 +107,22 @@ class GestorProductos {
 
     generarHtmlCajaProducto(producto){
         return `
-            <div class="col border border-light p-3">
-            <div class="card bg-dark text-light">
-              <div class="card-body">
-                <h5 class="card-title font-weight-bold">${producto.nombre}</h5>
-                <h7>$${producto.precio}</h7>
-                <br>
-                <br>
-                <a class="btn btn-primary"onclick="mandarInput('${producto._id}')">Agregar</a>
-              </div>
+        <div class="mt-4  bg-dark text-light border border-2 border-light  border-start-0  border-stop-0"">
+        <div class="row g-0">
+          <div class="col border-end">
+            <div class="d-grid gap-2">
+              <button class="btn btn-dark btn-sm" type="button">+</button>
+              <button class="btn btn-dark btn-sm" type="button">-</button>
             </div>
-          </div>
+        </div>
+        <div class="container col-8">
+          
+        </div>
+        <button class="col md-1 bg-dark text-light">
+          X
+        </button>
+        </div>
+      </div>
         `;
     }
 
