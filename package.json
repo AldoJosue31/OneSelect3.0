@@ -1,0 +1,32 @@
+{
+  "name": "oneselect",
+  "version": "1.0.0",
+  "description": "Aplicacion para administrar ordenes de manera facil y sencillla",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "build --dir",
+    "dist": "electron-builder"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AldoJosue31/OneSelect3.0.git"
+  },
+  "author": "G.A.D.I",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AldoJosue31/OneSelect_1.0/issues"
+  },
+  "homepage": "https://github.com/AldoJosue31/OneSelect_1.0#readme",
+  "devDependencies": {
+    "electron": "^16.0.5",
+    "electron-builder": "^22.14.13"
+  },
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "firebase": "^9.8.3",
+    "git": "^0.1.5",
+    "nedb": "^1.8.0"
+  }
+}

@@ -1,0 +1,29 @@
+<%- include("template/head", {tituloweb: "pagina de Inicio"}) %>
+<%- include("template/sidebar") %>
+
+<div class="container bg-dark text-light" style="margin-left: 60px;">
+    <div class="border border-light p-4">
+        <div class="d-flex flex-row">
+          <figure class="figure">
+            <img src="../assets/Logo_OneSelect_Claro.png" class="figure-img img-fluid rounded">
+            <h2>OneSelect</h2>
+          </figure>
+          <div class="d-inline-block fs-5 p-4"">
+            <h3 class="fw-bold">¿Que es?</h3>
+            
+            OneSelect es una aplicacion en la que se busca optimizar las ordenes haciendolas de manera mas faciles y rapidas, a su vez se busca evitar las aglomeraciones creadas en una cafeteria convencional</div>
+        </div>
+        <br>
+        <br>
+        <div class="d-inline-block fs-5">
+            <h3 class="fw-bold">Especificaciones</h3>
+            <br>
+            <p>Version: <%= version %></p>
+            <p>Desarrollador: <%= desarrollador %></p>
+            
+        </div>
+    </div>
+    
+</div>
+
+<%- include("template/footer") %>

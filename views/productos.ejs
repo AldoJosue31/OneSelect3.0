@@ -1,0 +1,68 @@
+<%- include("template/head", {tituloweb: "pagina de Inicio"}) %>
+<%- include("template/sidebar") %>
+<div class="container bg-dark text-light" style="margin-left: 60px;"">
+  <div class="row">
+      <div class="col">
+          <div class="border border-light p-4" style="min-height: 80vh;"">
+              <div class="col">
+                  <p class="h3 mb-4 text-center">Productos</p>   <button type="button" class="btn float-end text-light btn-success btn-sm mb-4"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">Agregar</button>
+                  <table class="table w-100" >
+                    <thead class="text-center">
+                         <tr>
+                             <th class="text-light">Nombre</th>
+                             <th class="text-light">Precio</th>
+                             <th class="text-light">Descripcion</th>
+                             <th class="text-light">Acciones</th>
+                        </tr>
+                     </thead>
+                        <tbody class="text-center" id="productosTabla">
+            
+            
+                        </tbody>
+                </table>
+              </div>
+            </div>
+      </div>
+  </div>
+</div>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark text-light  border-light border">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Crear un producto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="mt-4" id="frmNuevoProducto">
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                  <input type="text" id="nombre" class="form-control mb-4 bg-dark text-light" placeholder="Nombre" required/>
+                </div>
+              
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                  <input type="number" id="precio" class="form-control mb-4 bg-dark text-light focus-light" placeholder="Precio" required/>
+
+                </div>
+
+                <div class="form-outline mb-5">
+                    <input type="text" id="descripcion" class="form-control mb-4 bg-dark text-light focus-light" placeholder="Descripcion"/>
+                 </div>
+
+                 <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button id="btnCrearProducto"  type="submit" class="btn btn-success">Crear</button>
+                  </div>
+
+              </form>
+        </div>
+ 
+      </div>
+    </div>
+  </div>
+
+
+<%- include("template/footer") %>

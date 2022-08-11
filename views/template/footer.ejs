@@ -1,0 +1,43 @@
+<script type="text/javascript" src="js/slidebar.js"></script>
+<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="js/productos.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/carrito.js"></script>
+<script>
+    
+const { ipcMain } = require("electron")
+  const ipc = window.require('electron').ipcRenderer;
+   function Recargar(){
+    ipc.send('RecargarRegistros');  
+   };
+   function dividirRegistros(){
+    ipc.send('dividirRegistros');  
+   };
+   function dividirIndex(){
+    ipc.send('dividirIndex');  
+   };
+   var pathname = window.location.pathname;
+switch (pathname) {
+  case "/":
+     document.getElementById('ind').className = "bx bxs-home";
+    break;
+  case "/registros": // foo es 0, por lo tanto se cumple la condiciÃ³n y se ejecutara el siguiente bloque
+  document.getElementById('reg').className = "bx bxs-receipt";
+    break;
+  case "/covid": 
+  document.getElementById('cov').className = "bx bxs-heart";
+    break; 
+  case "/productos":
+  document.getElementById('pro').className = "bx bxs-food-menu"; 
+    break;
+  case "/acerca-de":
+  document.getElementById('ace').className = "bx bxs-info-circle";
+    break;
+  default:
+
+}
+</script>
+
+</body>
+
+</html>
