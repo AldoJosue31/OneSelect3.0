@@ -31,11 +31,23 @@ const carrito = new Datastore({
             }
         });
     };
+    
     function eliminarCarProducto (id) {
         carrito.remove({_id: id},  {}, function(error, numeroRegistrosEliminados){
     
         });
     };
+
+    carrito.find({}, function(err, productos){
+        console.log(productos);
+        if(productos){
+            operacion(productos);
+        }
+        if (err) {
+            console.error(err);
+            process.exit(0);
+        }
+    });
 
 
 class GestorCarrito {
@@ -50,23 +62,12 @@ class GestorCarrito {
 
     crearCajaProducto(iden) {
         dba.findOne({ _id: iden }, function (err, doc) {
-            TempNombre = doc.nombre
-            TempApellido = doc.precio
-            TempDescripcion = doc.descripcion
-            
+            agregarCarProducto(doc.nombre,doc.precio,doc.descripcion);
+            console.log(doc.nombre)
+            console.log(doc.precio)
+            console.log(doc.descripcion)
           });
-
-          console.log(TempNombre)
-          console.log(TempApellido)
-          console.log(TempDescripcion)
-
-          agregarCarProducto(TempNombre,TempApellido,TempDescripcion);
-          TempNombre = "";
-          TempApellido = "";
-          TempDescripcion = "";
-  
           this.cargarCajaCarProducto();
-
     }
 
     generarHtmlCajaCarProducto(carProducto){
@@ -93,9 +94,9 @@ class GestorCarrito {
 
     cargarCajaCarProducto() {
         obtenerCarProductos((carProductos) => {
-            let h = carProductos.map(this.generarHtmlCajaCarProducto).join('');
+            let cajasHTML = carProductos.map(this.generarHtmlCajaCarProducto).join('');
 
-            this.CajaCarrito.innerHTML = h;
+            this.CajaCarrito.innerHTML = cajasHTML;
         });
     }
 

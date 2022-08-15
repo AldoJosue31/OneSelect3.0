@@ -51,9 +51,6 @@ var option =
     delay : 2000
 };
 
-var inputOrden = document.getElementById('orden');
-
-var total = document.getElementById('total');
 
 var hoy = new Date();
 
