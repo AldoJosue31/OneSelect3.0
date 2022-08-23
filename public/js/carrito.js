@@ -2,6 +2,7 @@ var Datastore = require('nedb');
 let TempNombre = "";
 let TempApellido;
 let TempDescripcion;
+let resultado = 0;
 
 const carrito = new Datastore({
     filename: 'db/carrito.db',
@@ -38,16 +39,7 @@ const carrito = new Datastore({
         });
     };
 
-    carrito.find({}, function(err, productos){
-        console.log(productos);
-        if(productos){
-            operacion(productos);
-        }
-        if (err) {
-            console.error(err);
-            process.exit(0);
-        }
-    });
+  
 
 
 class GestorCarrito {
@@ -55,19 +47,30 @@ class GestorCarrito {
 
         this.CajaCarrito = document.getElementById('cajaCarrito');
 
+        this.txtTotal = document.getElementById('TextoTotal');
+
 
         this.cargarCajaCarProducto();
+        this.generarTotal();
     }
 
+    generarTotal() {
+        obtenerCarProductos((elemento) => {
+            elemento.forEach(element => {
+                resultado = resultado + Number(element.precio);
+            });
+            document.getElementById('TextoTotal').innerHTML = resultado;
+            resultado = 0;
+        });
+    }
 
     crearCajaProducto(iden) {
         dba.findOne({ _id: iden }, function (err, doc) {
             agregarCarProducto(doc.nombre,doc.precio,doc.descripcion);
-            console.log(doc.nombre)
-            console.log(doc.precio)
-            console.log(doc.descripcion)
           });
+    
           this.cargarCajaCarProducto();
+          this.generarTotal();
     }
 
     generarHtmlCajaCarProducto(carProducto){
@@ -106,6 +109,7 @@ class GestorCarrito {
         eliminarCarProducto(id);
 
         this.cargarCajaCarProducto();
+        this.generarTotal();
     }
 };
 
