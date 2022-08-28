@@ -95,6 +95,10 @@ class GestorOrdenes {
 
     crearRegistroOrden(evento) {
         evento.preventDefault();
+        carrito.remove({}, { multi: true }, function(err, numDeleted) {
+            console.log('Deleted', numDeleted, 'user(s)');
+       });
+       Carrito.cargarCajaCarProducto();
 
         agregarOrden(this.fecha,this.hora,this.nombres.value, this.apellidos.value, this.orden.value, totalnumero);
 
@@ -106,6 +110,7 @@ class GestorOrdenes {
         this.cargarRegistrosOrden();
         Recargar();
         generarNotificacion();
+  
 
     }
 

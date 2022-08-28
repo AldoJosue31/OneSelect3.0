@@ -1,6 +1,6 @@
 <%- include("template/head", {tituloweb: "pagina de Inicio"}) %>
 <%- include("template/sidebar") %>
-<div class="container bg-dark text-light text-center" style="margin-left: 60px;">
+<div class="container text-light text-center" style="margin-left: 60px;">
     <div class="row">
         <div class="col">
             <form id="frmNuevoRegistro" class="border border-light p-4">
@@ -11,12 +11,7 @@
 
                 <input type="text" id="apellidos" class="form-control mb-4 bg-dark text-light focus-light" placeholder="Apellidos" required> 
 
-                <div class="input-group mb-3">
-                  <input id="orden" type="text" class="form-control mb-4 bg-dark text-light" placeholder="Orden" aria-label="Recipient's username" aria-describedby="basic-addon2" required readonly>
-                  <div class="input-group-append" style="margin-left: 10px;">
-                    <button id="reiniciar" class="btn btn-outline-light" type="button" onclick="gestorOrdenes.reiniciarForm()">Eliminar</button>
-                  </div>
-                </div>
+     
                 
                 <div class=" bg-dark border border-light border-4 border-bottom-0 h-100 rounded" style="width: 25vh; position: fixed ;bottom: -3%; right: -20px; z-index: 20;">
                   <div id="cajaCarrito" style="height: 85%; overflow: auto;">

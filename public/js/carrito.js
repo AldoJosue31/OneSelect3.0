@@ -10,17 +10,6 @@ const carrito = new Datastore({
     });
 
 
-    function agregarCarProducto(nombre, precio, descripcion){
-        var productos = {
-            nombre: nombre,
-            precio: precio,
-            descripcion: descripcion
-        };
-    
-        carrito.insert(productos, function(error, nuevoObjeto){
-    
-        });
-    };
     function obtenerCarProductos(operacion) {
         carrito.find({}, function(err, productos){
             if(productos){
@@ -38,6 +27,12 @@ const carrito = new Datastore({
     
         });
     };
+
+    function EncontrarProducto(iden) {
+        dba.findOne({ _id: iden }, function (err, doc) {
+            agregarCarProducto(doc.nombre,doc.precio,doc.descripcion);
+          })
+    }
 
   
 
@@ -64,10 +59,26 @@ class GestorCarrito {
         });
     }
 
-    crearCajaProducto(iden) {
+    agregarDoc(nombre, precio, descripcion){
+        agregarCarProducto(nombre,precio,descripcion);
+    }
+
+    crearCajaCarProducto(iden) {
         dba.findOne({ _id: iden }, function (err, doc) {
-            agregarCarProducto(doc.nombre,doc.precio,doc.descripcion);
+            var productos = {
+                nombre: doc.nombre,
+                precio: doc.precio,
+                descripcion: doc.descripcion
+            };
+        
+            carrito.insert(productos, function(error, nuevoObjeto){
+               
+            });
+          
           });
+    
+          
+
     
           this.cargarCajaCarProducto();
           this.generarTotal();
