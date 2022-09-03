@@ -3,6 +3,7 @@ let TempNombre = "";
 let TempApellido;
 let TempDescripcion;
 let resultado = 0;
+var productos;
 
 const carrito = new Datastore({
     filename: 'db/carrito.db',
@@ -32,6 +33,31 @@ const carrito = new Datastore({
         dba.findOne({ _id: iden }, function (err, doc) {
             agregarCarProducto(doc.nombre,doc.precio,doc.descripcion);
           })
+    }
+   function crearCajaCarProducto(iden) {
+    Carrito.cargarCajaCarProducto();
+        dba.findOne({ _id: iden }, function (err, doc) {
+              productos = {
+                nombre: doc.nombre,
+                precio: doc.precio,
+                descripcion: doc.descripcion
+            };
+        
+          
+          
+          });
+
+          
+          carrito.insert(productos, function(error, nuevoObjeto){
+               
+        });
+          
+    
+          
+
+    
+          Carrito.cargarCajaCarProducto();
+          Carrito.generarTotal();
     }
 
   
@@ -63,26 +89,7 @@ class GestorCarrito {
         agregarCarProducto(nombre,precio,descripcion);
     }
 
-    crearCajaCarProducto(iden) {
-        dba.findOne({ _id: iden }, function (err, doc) {
-            var productos = {
-                nombre: doc.nombre,
-                precio: doc.precio,
-                descripcion: doc.descripcion
-            };
-        
-            carrito.insert(productos, function(error, nuevoObjeto){
-               
-            });
-          
-          });
-    
-          
 
-    
-          this.cargarCajaCarProducto();
-          this.generarTotal();
-    }
 
     generarHtmlCajaCarProducto(carProducto){
         return `

@@ -93,7 +93,7 @@ class GestorProductos {
             <h7>$${producto.precio}</h7>
             <br>
             <br>
-            <a class="btn btn-primary"onclick="Carrito.crearCajaCarProducto('${producto._id}')">Agregar</a>
+            <a class="btn btn-primary"onclick="crearCajaCarProducto('${producto._id}')">Agregar</a>
           </div>
         </div>
       </div>

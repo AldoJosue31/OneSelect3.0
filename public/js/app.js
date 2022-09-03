@@ -1,10 +1,15 @@
 var Datastore = require('nedb');
 var codigo;
+let nombres = document.getElementById('nombres');
+let apellidos = document.getElementById('apellidos');
+
+
 function getCodigo(id){
     codigo;
     codigo = id;
     console.log(codigo);
 }
+
 
 let bd = new Datastore({
     filename: 'db/ordenes.db',
@@ -50,9 +55,13 @@ var option =
     autohide : true,
     delay : 2000
 };
+let Orden;
+
 
 
 var hoy = new Date();
+let fecha = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();
+let hora = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
 
 class GestorOrdenes {
     constructor() {
@@ -61,11 +70,10 @@ class GestorOrdenes {
         this.registros = document.getElementById('registros');
 
 
-        this.fecha = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();
-        this.hora = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
-        this.nombres = document.getElementById('nombres');
-        this.apellidos = document.getElementById('apellidos');
-        this.orden = document.getElementById('orden');
+        this.fecha;
+        this.hora;
+
+        this.orden;
         this.boton = document.getElementById('reiniciar');
         this.total;
 
@@ -81,6 +89,7 @@ class GestorOrdenes {
             var toastElement = new bootstrap.Toast( toastHTMLElement, option );
             toastElement.show( );
     }
+ 
     
 
 
@@ -95,21 +104,26 @@ class GestorOrdenes {
 
     crearRegistroOrden(evento) {
         evento.preventDefault();
+        const TC = document.getElementById('TextoTotal').innerHTML;
+        const inNombres = document.getElementById('nombres');
+        const inApellidos = document.getElementById('apellidos');
+        carrito.find({}, function(err, productos){
+            Orden = productos;
+            agregarOrden(fecha,hora,inNombres.value, inApellidos.value, Orden, TC);
+        });
         carrito.remove({}, { multi: true }, function(err, numDeleted) {
             console.log('Deleted', numDeleted, 'user(s)');
        });
        Carrito.cargarCajaCarProducto();
 
-        agregarOrden(this.fecha,this.hora,this.nombres.value, this.apellidos.value, this.orden.value, totalnumero);
-
+       
         this.nombres.value = '';
         this.apellidos.value = '';
-        this.orden.value = '';
-        totalnumero = '';
+
 
         this.cargarRegistrosOrden();
         Recargar();
-        generarNotificacion();
+        this.generarNotificacion();
   
 
     }
@@ -120,7 +134,7 @@ class GestorOrdenes {
             <td><p class="text-light">${orden.hora}</td>
             <td><p class="text-light">${orden.nombres}</td>
             <td><p class="text-light">${orden.apellidos}</td>
-            <td><p class="text-light">${orden.orden}</td>
+            <td><p class="text-light">${mostrar(orden.orden)}</td>
             <td><p class="text-light">$${orden.total}</td>
             <td><input type="button" class="btn btn-danger btn-sm" onclick="gestorOrdenes.eliminarRegistroOrden('${orden._id}');" value="Eliminar"></td>
         </tr>
@@ -142,5 +156,13 @@ class GestorOrdenes {
     }
 }
 
-
+function mostrar(params) {
+    let htmlc;
+    let htb = "| ";
+    params.forEach(element => {
+            htmlc = `|| ${element.nombre} ||`;
+            htb += htmlc; 
+    });
+    return htb;
+}
 let gestorOrdenes = new GestorOrdenes();
