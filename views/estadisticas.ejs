@@ -1,0 +1,48 @@
+<%- include("template/head", {tituloweb: "pagina de Inicio"}) %>
+<%- include("template/sidebar") %>
+<div class="container text-light" style="margin-left: 60px;">
+    <div class="row">
+        <div class="col">
+            <div id="frmNuevoRegistro" class="p-4 border border-light" style="min-height: 80vh;background: rgb(33,37,41);
+            background: linear-gradient(90deg, rgba(33,37,41,1) 0%, rgba(38,43,47,1) 16%, rgba(38,43,47,1) 86%, rgba(33,37,41,1) 100%); --bs-border-opacity: .25;">
+
+                <div class="container">
+                 <p class="h3 mb-4 text-left text-center" id="TITULOS">Estadisticas</p>
+                 <div class="row row-cols-2 mt-5">
+                   <div class="col">
+                    <h2>Ventas totales</h2>
+                    <br>
+                    <h4>
+                        $
+                        <small id="VT"></small>
+                      </h4>
+                   </div>
+                   <div class="col mb-5">
+                    <h2>Ganancias totales</h2>
+                    <br>
+                   </div>
+                   <div class="col mt-5">
+                    <h2>Ventas igualitarias</h2>
+                    <br>
+                   </div>
+                   <div class="col  mt-5">
+                    <h2>Ventas extras</h2>
+                    <br>
+                   </div>
+                   </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+      
+
+
+
+
+
+
+
+<%- include("template/footer") %>

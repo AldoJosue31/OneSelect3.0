@@ -388,3 +388,28 @@ nav{
   font-size: 12px;
   line-height: 1.42857;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,500&display=swap');
+
+#TITULOS{
+  font-family: 'Open Sans', sans-serif;
+}
+label{
+  font-family: 'Montserrat', sans-serif; 
+}
+
+h8{
+  font-family: 'Montserrat', sans-serif; 
+
+}
+h5{
+  font-family: 'Montserrat', sans-serif; 
+}
+h2{
+  font-family: 'Montserrat', sans-serif; 
+  font-weight: bold;
+}
+#elemento{
+  font-family: 'Montserrat', sans-serif; 
+  font-size: 20px;
+}

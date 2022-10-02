@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, Menu } = require("electron")
+const { app, BrowserWindow, ipcMain, Menu, nativeTheme } = require("electron")
 const url = require('url')
 const path = require("path")
 require('./server.js')
@@ -80,8 +80,12 @@ function createWindow() {
     },
     show: false,
   });
-
+if (nativeTheme.shouldUseDarkColors == true) {
+  mainWindow.setIcon(path.join(__dirname, 'assets/Logo_OneSelect_Oscuro.png'));
+}else{
   mainWindow.setIcon(path.join(__dirname, 'assets/Logo_OneSelect_Claro.png'));
+}
+
   
   // Main window loads index.html file
   mainWindow.loadURL('http://localhost:3000')

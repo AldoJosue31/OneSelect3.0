@@ -3,6 +3,7 @@
 <script type="text/javascript" src="js/productos.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
 <script type="text/javascript" src="js/carrito.js"></script>
+<script type="text/javascript" src="js/estadisticas.js"></script>
 <script>
     
 const { ipcMain } = require("electron")
@@ -19,13 +20,16 @@ const { ipcMain } = require("electron")
    var pathname = window.location.pathname;
 switch (pathname) {
   case "/":
-     document.getElementById('ind').className = "bx bxs-home";
+     document.getElementById('ind').className = "bx bxs-home"; 
+     document.getElementById('btnInd').href = null;
     break;
   case "/registros": // foo es 0, por lo tanto se cumple la condiciÃ³n y se ejecutara el siguiente bloque
   document.getElementById('reg').className = "bx bxs-receipt";
     break;
   case "/covid": 
   document.getElementById('cov').className = "bx bxs-heart";
+  case "/importes": 
+  document.getElementById('imp').className = "bx bxs-coin";
     break; 
   case "/productos":
   document.getElementById('pro').className = "bx bxs-food-menu"; 

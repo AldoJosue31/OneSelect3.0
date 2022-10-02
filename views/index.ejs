@@ -1,24 +1,30 @@
 <%- include("template/head", {tituloweb: "pagina de Inicio"}) %>
 <%- include("template/sidebar") %>
-<div class="container text-light text-center" style="margin-left: 60px;">
+<div class="container text-light" style="margin-left: 60px;">
     <div class="row">
         <div class="col">
-            <form id="frmNuevoRegistro" class="border border-light p-4">
+            <form id="frmNuevoRegistro" class="p-4 border border-light" style="background: rgb(33,37,41);
+            background: linear-gradient(90deg, rgba(33,37,41,1) 0%, rgba(38,43,47,1) 16%, rgba(38,43,47,1) 86%, rgba(33,37,41,1) 100%); --bs-border-opacity: .25;">
               <button class="btn float-end text-light" onclick="dividirIndex()"><i class='bx bx-windows'></i></button>
-                <p class="h3 mb-4 text-left">Nueva orden</p>
+                <p class="h3 mb-4 text-center" id="TITULOS">Nueva orden</p>
 
-                <input type="text" id="nombres" class="form-control mb-4 bg-dark text-light" placeholder="Nombres" required>
+                <div class="mb-3">
+                  <label for="formGroupExampleInput" class="form-label">Nombre</label>
+                  <input type="text" class="form-control bg-dark text-light" id="nombres" placeholder="">
+                </div>
+                <div class="mb-3">
+                  <label for="formGroupExampleInput2" class="form-label">Apellido</label>
+                  <input type="text" class="form-control bg-dark text-light" id="apellidos" placeholder=""> 
+                </div>
 
-                <input type="text" id="apellidos" class="form-control mb-4 bg-dark text-light focus-light" placeholder="Apellidos" required> 
+                
 
      
-                
-                <div class=" bg-dark border border-light border-4 border-bottom-0 h-100 rounded" style="width: 25vh; position: fixed ;bottom: -3%; right: -20px; z-index: 20;">
+                <div class=" bg-dark border border-light border-4 border-bottom-0 h-100 rounded" style="width: 25vh; position: fixed ;bottom: -3%; right: -10px; z-index: 20;">
                   <div id="cajaCarrito" style="height: 85%; overflow: auto;">
 
           
 
-     
 
 
 
@@ -38,27 +44,54 @@
                       <span id="TextoTotal" class="input-group-text bg-dark text-light">0</span>
                     </div>
                   </div>
+                  <div class="d-grid gap-2">
+                    <button class="btn btn-danger" id="BT" type="button">Borrar todo</button>
+                  </div>
                   <br>
 
               </div>
 
-               <!--  <div class="container bg-dark border border-light border-4 border-bottom-0 h-25" style="width: 25vh; position: fixed ;bottom: 0px; right: 20px; z-index: 20;">
-                  <div class="modal-header">
-                    <h6 class="modal-title">Total a pagar</h6>
-                  </div>
-                  <br>
-                <div class="input-group mb-3 text-center mt-2 d-flex justify-content-center">
-                  <span class="input-group-text bg-dark text-light">$</span>
-                  <span id="total" class="input-group-text bg-dark text-light">0</span>
-                </div>
-              </div> -->
+
 
 
 
                 <div class="container-md">
-                  <div id="SecProductos" class="row row-cols-3"></div>
+                  <div id="SecProductos">
+                    <div class="accordion accordion-flush bg-dark text-light" id="accordionFlushExample" >
+                      <% marcas.forEach(function(marca) { %>
+                        <div class="accordion-item bg-dark text-light">
+                          <h2 class="accordion-header" id="flush-headingOne">
+                           
+                            <button class="accordion-button collapsed text-light mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#<%= marca.replace(/ /g,'') %>" aria-expanded="false" aria-controls="<%= marca %>" style="background: rgb(42,42,42);
+                      background: radial-gradient(circle, rgba(42,42,42,1) 50%, rgba(25,25,25,1) 100%);">
+                              
+                              <%= marca %>
+                            </button>
+                          </h2>
+                          <div id="<%= marca.replace(/ /g,'') %>" class="accordion-collapse collapse" aria-labelledby="<%= marca.replace(/ /g,'') %>" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body" style="background: rgb(42,42,42);
+                      background: radial-gradient(circle, rgba(42,42,42,1) 50%, rgba(25,25,25,1) 100%);">
+                                      <div class="container text-center">
+                                        <div class="row row-cols-4">
+                                          <div class="col mb-3"><div class="card w-75">
+                                        <div class="card-body bg-dark text-light">
+                                          <h5 class="card-title">Card title</h5>
+                                          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                          <a href="#" class="btn btn-primary">Button</a>
+                                        </div>
+                                      </div></div>
+                                        </div>
+                                      </div>
+                            </div>
+                          </div>
+                        </div>
+                    <% }); %>
+                    </div>
                 </div>
-                <button id="btnCrearRegistro" class="btn w-50 btn-success btn-block my-4" type="submit">Crear Orden</button>
+            
+                <div class="d-grid gap-2 mt-5" style="position: sticky; bottom: 10px; z-index: 100;">
+                  <button id="btnCrearRegistro" class="btn btn-success btn btn-primary"  type="submit">Crear Orden</button>
+                </div>
             </form>
         </div>
     </div>
@@ -73,10 +106,18 @@
       La orden se genero con exito!
   </div>
 </div>
+<div class="toast" id="Err" role="alert" aria-live="assertive" aria-atomic="true" style="position: absolute; top: 2px; right: 10px;">
+
+  
+  <div class="toast-body bg-dark text-light border border-light">
+      No hay productos agregados
+  </div>
+</div>
 <form id="frmNuevoProducto"></form>
 
                      
 </div>
+
 
 
 

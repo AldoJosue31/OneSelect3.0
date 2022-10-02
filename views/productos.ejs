@@ -3,15 +3,18 @@
 <div class="container bg-dark text-light" style="margin-left: 60px;"">
   <div class="row">
       <div class="col">
-          <div class="border border-light p-4" style="min-height: 80vh;"">
+          <div class="border border-light p-4" style="min-height: 80vh; background: rgb(33,37,41);
+          background: linear-gradient(90deg, rgba(33,37,41,1) 0%, rgba(38,43,47,1) 16%, rgba(38,43,47,1) 86%, rgba(33,37,41,1) 100%); --bs-border-opacity: .25;"">
               <div class="col">
-                  <p class="h3 mb-4 text-center">Productos</p>   <button type="button" class="btn float-end text-light btn-success btn-sm mb-4"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">Agregar</button>
+                  <p class="h3 mb-4 text-center" id="TITULOS">Productos</p>   <button type="button" class="btn float-end text-light btn-success btn-sm mb-4"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">Agregar</button>
                   <table class="table w-100" >
                     <thead class="text-center">
                          <tr>
-                             <th class="text-light">Nombre</th>
+                             <th class="text-light">Cantidad</th>
+                             <th class="text-light">Categoria</th>
+                             <th class="text-light">Marca</th>
+                             <th class="text-light">Mililitros</th>
                              <th class="text-light">Precio</th>
-                             <th class="text-light">Descripcion</th>
                              <th class="text-light">Acciones</th>
                         </tr>
                      </thead>
@@ -37,20 +40,75 @@
         </div>
         <div class="modal-body">
             <form class="mt-4" id="frmNuevoProducto">
-                <!-- Email input -->
-                <div class="form-outline mb-4">
-                  <input type="text" id="nombre" class="form-control mb-4 bg-dark text-light" placeholder="Nombre" required/>
-                </div>
-              
-                <!-- Password input -->
-                <div class="form-outline mb-4">
-                  <input type="number" id="precio" class="form-control mb-4 bg-dark text-light focus-light" placeholder="Precio" required/>
 
-                </div>
+              <div class="form-outline mb-3 form-floating mt-3">
+                <select class="form-select bg-dark text-light" id="cantidad" aria-label="Default select example">
+                 <option selected></option>
+                 <option value="1">una</option>
+                 <option value="2">Six</option>
+                 <option value="3">12 Pack</option>
+                 <option value="4">Plancha</option>
+                 <option value="5">Carton</option>
+             
+               </select>
+               <label for="floatingInputInvalid">Cantidad</label>
+               </div>
 
-                <div class="form-outline mb-5">
-                    <input type="text" id="descripcion" class="form-control mb-4 bg-dark text-light focus-light" placeholder="Descripcion"/>
+                <div class="form-outline mb-3 form-floating mt-3">
+                  <select class="form-select bg-dark text-light" id="marca" aria-label="Default select example">
+                   <option selected></option>
+                   <option value="1">Modelo especial</option>
+                   <option value="2">Modelo negra</option>
+                   <option value="3">Modelo malta</option>
+                   <option value="4">Corona extra</option>
+                   <option value="5">Corona cero</option>
+                   <option value="6">Corona agua rifada</option>
+                   <option value="7">Corona light</option>
+                   <option value="8">Victoria</option>
+                   <option value="9">Victoria chelada</option>
+                   <option value="10">Victoria mango</option>
+                   <option value="11">Victoria chamoy</option>
+                   <option value="12">Victoria cempasúchil</option>
+                   <option value="13">Bud light</option>
+                   <option value="14">Pacifico suave</option>
+                   <option value="15">Pacifico clara</option>
+                   <option value="16">Ultra</option>
+                   <option value="17">Ultra sabor</option>
+                   <option value="18">Barrilito</option>
+                 </select>
+                 <label for="floatingInputInvalid">Marca</label>
                  </div>
+
+                 <div class="form-outline mb-3 form-floating mt-3">
+                  <select class="form-select bg-dark text-light" id="select1" aria-label="Default select example" onchange="detectar()">
+                   <option selected></option>
+                   <option value="1">Lata chica</option>
+                   <option value="2">Lata</option>
+                   <option value="3">Laton</option>
+                   <option value="4">Mega laton</option>
+                   <option value="5">Cuarto</option>
+                   <option value="6">Media</option>
+                   <option value="7">Mega</option>
+                   <option value="8">Familiar</option>
+                 </select>
+                 <label for="floatingInputInvalid">Tamaño</label>
+                 </div>
+              
+    
+                <div class="input-group mb-3 form-floating mt-3">
+                  <input type="number" class="form-control bg-dark text-light" id="descripcion" aria-label="Amount (to the nearest dollar)" placeholder="Cantidad" readonly  required>
+                  <label for="floatingInputInvalid">Precio</label>
+                  <span class="input-group-text bg-dark text-light">ml</span>
+                </div>
+
+                <div class="form-outline mb-2 form-floating mt-3" >
+                  <input type="number" id="precio" class="form-control mb-4 bg-dark text-light focus-light" placeholder="Precio" required/>
+                  <label for="floatingInputInvalid">Precio</label>
+                 </div>
+                
+
+
+                 
 
                  <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -62,7 +120,9 @@
  
       </div>
     </div>
+    
   </div>
+
 
 
 <%- include("template/footer") %>

@@ -4,15 +4,29 @@
 <div class="container bg-dark text-light" style="margin-left: 60px;">
     <div class="row">
         <div class="col">
-            <form id="frmNuevoRegistro" class="border border-light p-4"  style="min-height: 80vh;">
-                <button class="btn float-end text-light" onclick="dividirRegistros()"><i class='bx bx-windows'></i></button>
+            <form id="frmNuevoRegistro" class="border border-light p-4"  style="min-height: 80vh; background: rgb(33,37,41);
+            background: linear-gradient(90deg, rgba(33,37,41,1) 0%, rgba(38,43,47,1) 16%, rgba(38,43,47,1) 86%, rgba(33,37,41,1) 100%); --bs-border-opacity: .25;"">
+                <button class="btn float-end text-light" onclick="dividirRegistros()"><i class='bx bx-windows'></i></button>  
+                <select class="form-select form-select-sm w-25 bg-dark text-light" aria-label=".form-select-sm example" onchange="gestorOrdenes.detectarOrg();" id="organizacion" >
+                    <option selected>Fecha</option>
+                    <option value="1">Hora</option>
+                    <option value="2">Nombre</option>
+                    <option value="3">Apellido</option>
+                    <option value="3">Total</option>
+                    
+                  </select>
+                  <br>
+                  <input type="date" id="start"  onchange="gestorOrdenes.detectarOrg();"
+                   class="bg-dark text-light"
+       >
                 <div class="col">
-                    <p class="h3 mb-4 text-center">Registros</p>
-                    <table class="table w-100">
+                    <p class="h3 mb-4 text-center" id="TITULOS">Registros</p>  
+                    <table class="table w-100" id="TablaRegistros">
                         <thead>
                             <tr>
                                 <th class="text-light">Fecha de creacion</th>
                                 <th class="text-light">Hora de creacion</th>
+                                <th class="text-light">Atendido por</th>
                                 <th class="text-light">Nombres</th>
                                 <th class="text-light">Apellidos</th>
                                 <th class="text-light">Orden</th>
@@ -23,11 +37,37 @@
                         <tbody id="registros">
 
                         </tbody>
+                        
                     </table>
+                    <h6 id="TITULO" class="container text-center text-light w-100">
+                        
+                    </h6>
+                    <div class="container border border-white" style="position: fixed; bottom: 0px;right: 0px; width: 20vh; height: 14vh;">
+                        <div class="card text-center bg-dark">
+                            <div class="card-header">
+                       
+                            </div>
+                            <div class="card-body">
+                              <h5 class="card-title">TOTAL</h5>
+                              <p class="card-text">$121</p>
+                            </div>
+                            <div class="card-footer text-muted">
+                        
+                            </div>
+                          </div>
+                    </div>
                 </div>
+                
             </form>
         </div>
     </div>
+    <ul class="dropdown-menu">
+        <div class="dropdown-item"></div>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+      </ul>
 </div>
+
+
 
 <%- include("template/footer") %>

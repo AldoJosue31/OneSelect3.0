@@ -1,20 +1,6 @@
-</html><!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>OneSelect</title>
-    <base href="/">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/bootstrap-grid.css">
-    <link rel="stylesheet" href="css/bootstrap-grid.css.map">
-    <!-- Boxiocns CDN Link -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/boxicons.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head><body class="container bg-dark text-light">
+<body class="container text-light" style="background: rgb(34,38,42);
+background: linear-gradient(90deg, rgba(34,38,42,1) 0%, rgba(37,37,37,1) 100%);" >
   <nav style="-webkit-app-region: drag;">
 
   </nav>
@@ -25,7 +11,7 @@
     </div>
       <ul class="nav-links">
         <li>
-          <a href="/" id="XD">
+          <a href="/" id="btnInd">
             <i class='bx bx-home-alt' id="ind"></i>
             <span class="link_name">Inicio</span>
           </a>
@@ -40,6 +26,36 @@
           </a>
           <ul class="sub-menu blank">
             <li><a class="link_name">Registros</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="/estadisticas">
+            <i class='bx bx-line-chart' id="est"></i>
+            <span class="link_name">Estadisticas</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li><a class="link_name">Estadisticas</a></li>
+          </ul>
+        </li>
+  
+    
+      
+        <li>
+          <a href="/importes">
+            <i class='bx bx-coin' id="imp"></i>
+            <span class="link_name">Importes</span> 
+          </a>
+          <ul class="sub-menu blank"">
+             <li><a class="link_name">Importes</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="/productos">
+            <i class='bx bx-food-menu' id="pro"></i>
+            <span class="link_name">Agregar</span> 
+          </a>
+          <ul class="sub-menu blank"">
+             <li><a class="link_name">Agregar</a></li>
           </ul>
         </li>
         <li>
@@ -60,25 +76,17 @@
             <li><a class="link_name">Acerca de</a></li>
           </ul>
         </li>
-        <li>
-        <li>
-          <a href="/productos">
-            <i class='bx bx-food-menu' id="pro"></i>
-            <span class="link_name">Agregar</span> 
-          </a>
-          <ul class="sub-menu blank"">
-             <li><a class="link_name">Agregar</a></li>
-          </ul>
-        </li>
       <div class="profile-details">
         <div class="profile-content">
-          <!--<img src="image/profile.jpg" alt="profileImg">-->
+          <div class="logo-details">
+            <img src="../assets/aldo_ico.png">
+          </div>
         </div>
         <div class="sn-version">
-          <div class="school_name">CBTis 8</div>
+          <div class="school_name" id="servidor"></div>
           <div class="version">Version <%= version  %></div>
         </div>
-        <i class='bx bx-log-out' ></i>
+        <i class='bx bx-log-out' onclick="cambiarDeUsuario()"></i>
       </div>
     </li>
   </ul>
