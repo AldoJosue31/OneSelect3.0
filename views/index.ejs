@@ -55,38 +55,9 @@
 
 
 
-                <div class="container-md">
-                  <div id="SecProductos">
-                    <div class="accordion accordion-flush bg-dark text-light" id="accordionFlushExample" >
-                      <% marcas.forEach(function(marca) { %>
-                        <div class="accordion-item bg-dark text-light">
-                          <h2 class="accordion-header" id="flush-headingOne">
-                           
-                            <button class="accordion-button collapsed text-light mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#<%= marca.replace(/ /g,'') %>" aria-expanded="false" aria-controls="<%= marca %>" style="background: rgb(42,42,42);
-                      background: radial-gradient(circle, rgba(42,42,42,1) 50%, rgba(25,25,25,1) 100%);">
-                              
-                              <%= marca %>
-                            </button>
-                          </h2>
-                          <div id="<%= marca.replace(/ /g,'') %>" class="accordion-collapse collapse" aria-labelledby="<%= marca.replace(/ /g,'') %>" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body" style="background: rgb(42,42,42);
-                      background: radial-gradient(circle, rgba(42,42,42,1) 50%, rgba(25,25,25,1) 100%);">
-                                      <div class="container text-center">
-                                        <div class="row row-cols-4">
-                                          <div class="col mb-3"><div class="card w-75">
-                                        <div class="card-body bg-dark text-light">
-                                          <h5 class="card-title">Card title</h5>
-                                          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                          <a href="#" class="btn btn-primary">Button</a>
-                                        </div>
-                                      </div></div>
-                                        </div>
-                                      </div>
-                            </div>
-                          </div>
-                        </div>
-                    <% }); %>
-                    </div>
+              <div class="container-md">
+                <div id="SecProductos" class="row row-cols-3"></div>
+           
                 </div>
             
                 <div class="d-grid gap-2 mt-5" style="position: sticky; bottom: 10px; z-index: 100;">

@@ -72,6 +72,7 @@ class GestorProductos {
         this.frmNuevoProducto.addEventListener('submit', this.crearCajaProducto.bind(this));
         
     }
+    
 
     crearCajaProducto(event) {
         event.preventDefault();
@@ -158,7 +159,23 @@ class GestorProductos {
 
 
     }
-
+    generarHtmlCajaProducto(producto){
+        return `
+        <div class="col border border-light p-3" >
+        <div class="card bg-dark text-light" style="${producto.color}">
+          <div class="card-body">
+          <h5 class="card-title font-weight-bold">${producto.categoria}</h5>
+            <br>
+            <h5 class="card-title font-weight-bold">${producto.marca}</h5>
+            <h7>$${producto.precio}</h7>
+            <br>
+            <br>
+            <a class="btn btn-primary"onclick="crearCajaCarProducto('${producto._id}')">Agregar</a>
+          </div>
+        </div>
+      </div>
+        `;
+    }
    
 
     cargarTablaroducto() {

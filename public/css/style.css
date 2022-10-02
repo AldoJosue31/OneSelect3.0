@@ -413,3 +413,6 @@ h2{
   font-family: 'Montserrat', sans-serif; 
   font-size: 20px;
 }
+#ModeloEspecial{
+  background-attachment: fixed;
+}
