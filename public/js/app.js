@@ -153,11 +153,19 @@ class GestorOrdenes {
 
 
         this.btnCrearRegistro = document.getElementById('btnCrearRegistro'); 
+        this.TM = document.getElementById('TM');
 
         this.agregarEventListeners();
         this.detectarOrg()
     }
-
+    generarTotalDeMes(ordene){
+        let totalC;
+        totalC = 0;
+        ordene.forEach(element => {
+            totalC = totalC + Number(element.total);
+        });
+        return totalC;
+    }
     detectarOrg() {
         console.log(document.getElementById('organizacion').options[document.getElementById('organizacion').selectedIndex].text)
         switch (document.getElementById('organizacion').options[document.getElementById('organizacion').selectedIndex].text) {
@@ -167,6 +175,9 @@ class GestorOrdenes {
                     
                     if (ordenes.length > 0) {
                         this.registros.innerHTML = html;
+                        this.notFound.innerHTML = "";
+                        this.TM.innerHTML = this.generarTotalDeMes(ordenes);
+                        
                     } else {
                         console.log("No hay nada we")
                         this.registros.innerHTML = html;
@@ -325,3 +336,22 @@ function obtFecha() {
    
 
 }
+function onDragStart(event) {
+    event
+      .dataTransfer
+      .setData('text/plain', event.target.id);
+  
+
+  }
+  function onDragOver(event) {
+    event.preventDefault();
+  }
+  function onDrop(event) {
+    const id = event.dataTransfer.getData('text');
+      crearCajaCarProducto(id);
+      event
+      .dataTransfer
+      .clearData();
+      
+  }
+ 

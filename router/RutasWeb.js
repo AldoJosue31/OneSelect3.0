@@ -25,6 +25,7 @@ router.get("/", (req, res) => {
 "Ultra sabor",
 "Barrilito"
   ]
+  
   res.render("index", { version: versionG, desarrollador: desarrolladorG, marcas: marcas}
      
       );

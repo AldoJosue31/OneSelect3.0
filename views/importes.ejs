@@ -11,11 +11,13 @@
                     <table class="table w-100">
                         <thead>
                             <tr>
-                                <th class="text-light">Fecha de creacion</th>
-                                <th class="text-light">Hora de creacion</th>
-                                <th class="text-light">Nombres</th>
-                                <th class="text-light">Apellidos</th>
-                                <th class="text-light">Importe</th>
+                                <th class="text-light">Fecha</th>
+                                <th class="text-light">Hora</th>
+                                <th class="text-light">Atendido por</th>
+                                <th class="text-light">Nombre</th>
+                                <th class="text-light">Apellido</th>
+                                <th class="text-light">Importe(s)</th>
+                                <th class="text-light">Tipo</th>
                                 <th class="text-light">Total</th>
                                 <th class="text-light">Acciones</th>
                             </tr>
@@ -37,20 +39,74 @@
     <div class="modal-dialog">
       <div class="modal-content bg-dark text-light  border-light border">
         <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Crear un producto</h5>
+          <h5 class="modal-title" id="staticBackdropLabel">Crear un importe</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form class="mt-4" id="frmNuevoProducto">
+            <form class="mt-4" id="frmNuevoImporte">
+              <div class="form-outline mb-2 form-floating mt-3" >
+                <input type="text" id="imp_nombre" class="form-control mb-4 bg-dark text-light focus-light" placeholder="Precio" required/>
+                <label for="floatingInputInvalid">Nombre</label>
+               </div>
+              <div class="form-outline mb-2 form-floating mt-3" >
+                <input type="text" id="imp_apellido" class="form-control mb-4 bg-dark text-light focus-light" placeholder="Precio"/>
+                <label for="floatingInputInvalid">Apellido</label>
+               </div>
+              <div class="form-outline mb-2 form-floating mt-3" >
+                <input type="number" id="imp_cantidad" class="form-control mb-4 bg-dark text-light focus-light" placeholder="Precio" required/>
+                <label for="floatingInputInvalid">Cantidad</label>
+               </div>
 
-                <div class="form-outline mb-2 form-floating mt-3" >
-                  <input type="number" id="precio" class="form-control mb-4 bg-dark text-light focus-light" placeholder="Precio" required/>
-                  <label for="floatingInputInvalid">Precio</label>
+                <div class="form-outline mb-3 form-floating mt-3">
+                  <select class="form-select bg-dark text-light" id="imp_marca" aria-label="Default select example">
+                   <option selected></option>
+                   <option value="1">Modelo especial</option>
+                   <option value="2">Modelo negra</option>
+                   <option value="3">Modelo malta</option>
+                   <option value="4">Corona extra</option>
+                   <option value="7">Corona light</option>
+                   <option value="8">Victoria</option>
+                   <option value="13">Bud light</option>
+                   <option value="15">Pacifico clara</option>
+                   <option value="18">Barrilito</option>
+                 </select>
+                 <label for="floatingInputInvalid">Marca</label>
+                 </div>
+
+                 <div class="form-outline mb-3 form-floating mt-3">
+                  <select class="form-select bg-dark text-light" id="imp_categoria" aria-label="Default select example">
+                   <option selected></option>
+                   <option value="1">Cuarto</option>
+                   <option value="2">Media</option>
+                   <option value="3">Mega</option>
+                   <option value="4">Familiar</option>
+                 </select>
+                 <label for="floatingInputInvalid">Tamaño</label>
+                 </div>
+
+                 <div class="d-flex justify-content-center">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Imp" value="option1">
+                    <label class="form-check-label" for="inlineRadio1">Importe</label>
+                  </div>
+                  <div class="form-check form-check-inline bg-dark">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Pres" value="option2">
+                    <label class="form-check-label" for="inlineRadio2">Prestamo</label>
+                  </div>
+                 </div>
+
+
+               
+              
+    
+                 <div class="form-outline mb-2 form-floating mt-3" >
+                  <input type="number" id="eloalto" class="form-control mb-4 bg-dark text-light focus-light" placeholder="Precio" required />
+                  <label for="floatingInputInvalid">Importe</label>
                  </div>
         
                  <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button id="btnCrearProducto"  type="submit" class="btn btn-success">Crear</button>
+                    <button   type="submit" class="btn btn-success">Crear</button>
                   </div>
 
               </form>

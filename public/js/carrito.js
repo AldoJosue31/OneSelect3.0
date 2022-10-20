@@ -27,6 +27,7 @@ function sumarProducto(id){
         });
     Carrito.generarTotal();
     Carrito.cargarCajaCarProducto();
+   
 }
 
 
@@ -66,12 +67,20 @@ const carrito = new Datastore({
           })
     }
    function crearCajaCarProducto(iden) {
-    Carrito.cargarCajaCarProducto();
     let arreglo2 =  arreglo.filter(element => element._id == iden);
           carrito.insert(arreglo2, function(error, nuevoObjeto){
+            if (error) {
+                console.error(error);
+            }else{
+                Carrito.cargarCajaCarProducto();
+                Carrito.generarTotal();
+                console.log(document.getElementById(`"${nuevoObjeto[0]._id}"`).classList)
+                document.getElementById(`"${nuevoObjeto[0]._id}"`).classList.remove('eliminacionAnimada')
+                setTimeout(() => document.getElementById(`"${nuevoObjeto[0]._id}"`).classList.add('eliminacionAnimada'), 1)
+            }
         });
-          Carrito.cargarCajaCarProducto();
-          Carrito.generarTotal();
+         
+        
     }
 
 class GestorCarrito {
@@ -81,6 +90,7 @@ class GestorCarrito {
 
         this.txtTotal = document.getElementById('TextoTotal');
         this.BtnBT = document.getElementById('BT');
+        this.bg = document.getElementById('cajaCarrito');
 
 
         this.cargarCajaCarProducto();
@@ -100,6 +110,10 @@ class GestorCarrito {
        });
         this.cargarCajaCarProducto();
         document.getElementById('TextoTotal').innerHTML = "0";
+            this.bg.classList.remove('cajaAnimada')
+            setTimeout(() => this.bg.classList.add('cajaAnimada'), 1)
+ 
+        
     }
 
     generarTotal() {
@@ -118,25 +132,28 @@ class GestorCarrito {
     }
 
     generarHtmlCajaCarProducto(carProducto){
-        return `
-        <div class="mt-4 mb-4  bg-dark text-light border border-2 border-light  border-start-0  border-stop-0"">
-        <div class="row g-0">
-          <div class="col border-end">
-            <div class="d-grid gap-2">
-            <input type="button" class="btn btn-dark btn-sm col bg-dark text-light" value="+" onClick="sumarProducto('${carProducto._id}')">
-              <div class="container">${carProducto.cantidades}x</div>
-              <input type="button" class="btn btn-dark btn-sm col bg-dark text-light" value="-" onClick="restarProducto('${carProducto._id}')">
-            </div>
-        </div>
-        <div class="container col-8" style="${carProducto.color}">
-        <h5>${carProducto.cantidad}<br> ${carProducto.marca} ${carProducto.mililitros} ml</h5>
+        return `<div id="${carProducto._id}">
+    <div class="container text-light border border-2 border-light  border-start-0  border-stop-0 mt-4" >
+  <div class="row">
+    <div class="col-2 ">
+  <div class="row row-cols-1 h-100">
+  <input type="button" class="btn btn-success btn-sm col text-light" value="+" onClick="sumarProducto('${carProducto._id}')">
+       <input type="button" class="col btn btn-dark btn-sm col bg-dark text-light" value="${carProducto.cantidades}x">
+    <input type="button" class="col btn btn-danger btn-sm col  text-light" value="-" onClick="restarProducto('${carProducto._id}')">
+  </div>
+    </div>
+    <div class="col border-start border-end" style="${carProducto.color}">
+    <h5>${carProducto.cantidad}<br> ${carProducto.marca} ${carProducto.mililitros} ml</h5>
         <h4>$${carProducto.precio}</h4>
-        </div>
-        <input type="button" class="col md-1 bg-dark text-light" onclick="Carrito.eliminarCajaCarProducto('${carProducto._id}');">
-          XX
-        </input>
-        </div>
-      </div>
+    </div>
+    <div class="col-2">
+    <div class="row row-cols-1 h-100">
+    <input type="button" class="col btn btn-dark btn-sm col bg-danger text-light" value="X" onclick="Carrito.eliminarCajaCarProducto('${carProducto._id}');">
+  </div>
+  </div>
+  </div>
+</div>
+</div>
         `;
     }
 

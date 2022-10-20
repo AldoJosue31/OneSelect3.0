@@ -161,7 +161,12 @@ class GestorProductos {
     }
     generarHtmlCajaProducto(producto){
         return `
-        <div class="col border border-light p-3" >
+        <div
+         class="col border border-light p-3" 
+         draggable="true"
+         ondragstart="onDragStart(event);"
+         id="${producto._id}"
+       >
         <div class="card bg-dark text-light" style="${producto.color}">
           <div class="card-body">
           <h5 class="card-title font-weight-bold">${producto.categoria}</h5>

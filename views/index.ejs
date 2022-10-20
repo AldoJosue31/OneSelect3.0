@@ -1,5 +1,6 @@
 <%- include("template/head", {tituloweb: "pagina de Inicio"}) %>
 <%- include("template/sidebar") %>
+
 <div class="container text-light" style="margin-left: 60px;">
     <div class="row">
         <div class="col">
@@ -20,52 +21,80 @@
                 
 
      
-                <div class=" bg-dark border border-light border-4 border-bottom-0 h-100 rounded" style="width: 25vh; position: fixed ;bottom: -3%; right: -10px; z-index: 20;">
-                  <div id="cajaCarrito" style="height: 85%; overflow: auto;">
-
-          
 
 
 
 
-
-
-
-
-                    
-
-
-
-                  </div>
-                  <div class="modal-header text-center align-middle order border-light border-4 border-top w-100" >
-                    <h6 class="modal-title w-100">Total a pagar </h6>
-                    <div class="input-group mb-3 text-center mt-2 d-flex justify-content-center">
-                      <span class="input-group-text bg-dark text-light">$</span>
-                      <span id="TextoTotal" class="input-group-text bg-dark text-light">0</span>
+             <div class="container mt-4 mb-4 w-25" style="position: absolute; left: -6.5%;">
+              <div class="container text-center">
+                <div class="row row-cols-2">
+                <div class="col">
+                  <div class="container text-center" >
+                    <div class="row row-cols-1">
+                      <div class="d-grid gap-2 col-6 mx-auto">
+                        <button class="btn btn-primary" type="button">Modelo</button>
+                        <button class="btn btn-primary" type="button">Victoria</button>
+                        <button class="btn btn-primary" type="button">Ultra</button>
+                        <button class="btn btn-primary" type="button">Barrilito</button>
+                      </div>
                     </div>
                   </div>
-                  <div class="d-grid gap-2">
-                    <button class="btn btn-danger" id="BT" type="button">Borrar todo</button>
-                  </div>
-                  <br>
-
+                </div>
+                <div class="col">
+               
+                </div>
+                </div>
               </div>
+             </div>
+              <div class="container-md" >
+                <div 
+                id="SecProductos"
+                 class="row row-cols-3"
+                 
+                  >
 
-
-
-
-
-              <div class="container-md">
-                <div id="SecProductos" class="row row-cols-3"></div>
+                  </div>
            
                 </div>
             
-                <div class="d-grid gap-2 mt-5" style="position: sticky; bottom: 10px; z-index: 100;">
+                <div class="d-grid gap-2 mt-5 bg-dark" style="position: sticky; bottom: 10px; z-index: 100;">
                   <button id="btnCrearRegistro" class="btn btn-success btn btn-primary"  type="submit">Crear Orden</button>
                 </div>
             </form>
         </div>
     </div>
+</div>
+
+<div class=" bg-dark border border-light border-4 border-bottom-0 h-100 rounded" style="width: 25vh; position: fixed ;bottom: -3%; right: -8px; z-index: 20;">
+  <div id="cajaCarrito" style="height: 85%; overflow: auto;"  ondragover="onDragOver(event);"
+  ondrop="onDrop(event);">
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+  </div>
+  <div class="modal-header text-center align-middle order border-light border-4 border-top w-100" >
+    <h6 class="modal-title w-100">Total a pagar </h6>
+    <div class="input-group mb-3 text-center mt-2 d-flex justify-content-center">
+      <span class="input-group-text bg-dark text-light">$</span>
+      <span id="TextoTotal" class="input-group-text bg-dark text-light">0</span>
+    </div>
+  </div>
+  <div class="d-grid gap-2">
+    <button class="btn btn-danger" id="BT" type="button">Borrar todo</button>
+  </div>
+  <br>
+
 </div>
 
       

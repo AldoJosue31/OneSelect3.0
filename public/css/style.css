@@ -363,12 +363,14 @@ body {
 i{
   -webkit-app-region: no-drag;
 }
+
 nav{
   top: 1px;
   right: 1px;
   height: 60px;
   width: 100%;
-  position: absolute;
+  position: fixed;
+  z-index: 4021021321321387123901283912312903671208;
 }
 .btn-circle.btn-xl {
   width: 70px;
@@ -405,6 +407,10 @@ h8{
 h5{
   font-family: 'Montserrat', sans-serif; 
 }
+#TM{
+  font-family: 'Montserrat', sans-serif; 
+  font-size: 20px;
+}
 h2{
   font-family: 'Montserrat', sans-serif; 
   font-weight: bold;
@@ -415,4 +421,43 @@ h2{
 }
 #ModeloEspecial{
   background-attachment: fixed;
+}
+th, h6 {
+  font-family: 'Montserrat', sans-serif ;  
+}
+
+#ProductoEnCarrito{
+  margin-top: 10%;
+  animation-duration: .5s;
+  animation-name: slidein;
+}
+.cajaAnimada{
+  animation-duration: 1s;
+  animation-name: borrarTodo;
+}
+.eliminacionAnimada{
+  animation-duration: 1s;
+  animation-name: borrarUno;
+}
+
+
+@keyframes borrarTodo {
+  from {
+    background-color: red;
+  }
+
+  to {
+  
+    
+  }
+}
+@keyframes borrarUno {
+  from {
+    margin-right: 0vh;
+  }
+
+  to {
+    margin-right: 1vh;
+    
+  }
 }

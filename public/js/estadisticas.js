@@ -2,8 +2,9 @@ let VT = document.getElementById('VT');
 let totalC = 0;
 
 bd.find({}, function(err, ordenes){
+    totalC = 0;
     ordenes.forEach(element => {
-        totalC = 0;
+        
         totalC = totalC + Number(element.total);
     });
 

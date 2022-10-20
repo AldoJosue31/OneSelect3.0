@@ -1,4 +1,77 @@
 var Datastore = require('nedb');
+function init() {
+ 
+ 
+    let options = [
+        {
+            value: "1",
+            text: "Cuarto"
+        },
+        {
+            value: "2",
+            text: "Media"
+        },
+        {
+            value: "3",
+            text: "Mega"
+        },
+        {
+            value: "4",
+            text: "Familiar"
+        }
+    ];
+ 
+ 
+ 
+    let select = createSELECT(options);
+ 
+    document.body.appendChild(select);
+ 
+}
+ 
+function createSELECT(options) {
+ 
+    let select = document.getElementById('imp_categoria');
+    if (options && Array.isArray(options)) {
+        for (let index = 0; index < options.length; index++) {
+            const element = options[index];
+ 
+            let option = document.createElement("option");
+ 
+            if (element.value) {
+                option.setAttribute("value", element.value);
+            }
+            if (element.text) {
+                let optionText = document.createTextNode(element.text);
+                option.appendChild(optionText);
+            }
+ 
+            select.appendChild(option);
+        }
+    }
+ 
+    return select;
+}
+ 
+ 
+window.onload = init;
+
+document.getElementById('Imp').addEventListener('click', function() {
+
+if(document.getElementById('Imp').checked) {
+    document.getElementById('eloalto').disabled = false;
+  } 
+    });
+    document.getElementById('Pres').addEventListener('click', function() {
+    if(document.getElementById('Pres').checked) {
+        document.getElementById('eloalto').disabled = true;
+        document.getElementById('eloalto').value = "";
+      } 
+        });
+
+
+
+
 const importesDB = new Datastore({
     filename: 'db/importes.db',
      autoload: true
@@ -11,25 +84,27 @@ let hora = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
 
 
     
-function agregarImporte(fecha, hora, nombres, apellidos, orden, total){
-    var pedido = {
-        fecha: fecha,
-        hora: hora,
-        nombres: nombres,
-        apellidos: apellidos,
-        orden: orden,
-        total : total,
+function agregarImporte(nombre, apellido, importes, tipo, total){
+    var importe = {
+        fecha: getDateTime(0),
+        hora: new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds(),
+        ap: localStorage.getItem("EA"),
+        nombre: nombre,
+        apellido: apellido,
+        importes: importes,
+        tipo : tipo,
+        total : total
     };
 
-    importesDB.insert(pedido, function(error, nuevoObjeto){
+    importesDB.insert(importe, function(error, nuevoObjeto){
 
     });
 };
 
-function obtenerOrdenes(operacion) {
-    importesDB.find({}, function(err, ordenes){
-        if(ordenes){
-            operacion(ordenes);
+function obtenerImportes(operacion) {
+    importesDB.find({}, function(err, importes){
+        if(importes){
+            operacion(importes);
         }
         if (err) {
             console.error(err);
@@ -38,7 +113,7 @@ function obtenerOrdenes(operacion) {
     });
 };
 
-function eliminarOrden (id) {
+function eliminarImporte (id) {
     importesDB.remove({_id: id},  {}, function(error, numeroRegistrosEliminados){
 
     });
@@ -56,20 +131,27 @@ function generarNotificacionImporte(){
     toastElement.show( );
 }
 
-let Orden;
+
 
 
 
 
 class GestorImportes {
     constructor() {
-        this.frmNuevoImporte = document.getElementById('frmNuevoRegistro');
+        this.frmNuevoImporte = document.getElementById('frmNuevoImporte');
 
-        this.importes = document.getElementById('registros');
+        this.Tblimportes = document.getElementById('importes');
 
 
-        this.nombres = document.getElementById('nombres');
-        this.apellidos = document.getElementById('apellidos');
+        this.nombre = document.getElementById('imp_nombre');
+        this.apellido = document.getElementById('imp_apellido');
+        this.miCheckbox = document.getElementById('Imp');
+        this.cantidad = document.getElementById('imp_cantidad');
+        this.imp_marca = document.getElementById('imp_marca').options[document.getElementById('imp_marca').selectedIndex].text;
+        this.imp_categoria = document.getElementById('imp_categoria').options[document.getElementById('imp_categoria').selectedIndex].text;
+        this.canImp = document.getElementById('eloalto');
+        this.ifImp;
+        this.importes;
 
         this.orden;
         this.total;
@@ -77,7 +159,8 @@ class GestorImportes {
 
         this.btnCrearRegistro = document.getElementById('btnCrearRegistro'); 
 
-        this.cargarRegistrosOrden();
+
+        this.cargarImportes();
         this.agregarEventListeners();
     }
 
@@ -96,71 +179,67 @@ class GestorImportes {
 
     crearRegistroImporte(evento) {
         evento.preventDefault();
-        const TC = document.getElementById('TextoTotal').innerHTML;
-        const inNombres = document.getElementById('nombres').value;
-        const inApellidos = document.getElementById('apellidos').value;
-        agregarOrden(fecha,hora,inNombres, inApellidos, Orden, TC);
-       Carrito.cargarCajaCarProducto();
+
+        this.importes = `${this.cantidad.value}x ${document.getElementById('imp_marca').options[document.getElementById('imp_marca').selectedIndex].text} ${document.getElementById('imp_categoria').options[document.getElementById('imp_categoria').selectedIndex].text}`;
+        if(this.miCheckbox.checked) {
+           
+            this.ifImp = "Importe"
+          } else {
+           this.ifImp = "Prestamo"
+           this.canImp.value = "00";
+          }
+          agregarImporte(this.nombre.value, this.apellido.value, this.importes, this.ifImp,this.canImp.value);
+
 
        
-       document.getElementById('nombres').value = "";
-       document.getElementById('apellidos').value = "";
+       this.nombre.value = "";
+       this.apellido.value = "";
+       this.cantidad.value = "";
+       this.canImp.value = "";
+       document.getElementById('imp_marca').options[document.getElementById('imp_marca').selectedIndex = 0];
+       document.getElementById('imp_categoria').options[document.getElementById('imp_categoria').selectedIndex = 0];
 
-       generarNotificacionCreada();
-        this.cargarRegistrosOrden();
-        document.getElementById('TextoTotal').innerHTML = "0";
+
+ 
+        this.cargarImportes();
+       
       
   
 
     }
 
-    generarHtmlRegistroOrden(orden){
+    generarHtmlImporte(orden){
         return `<tr>
             <td><p class="text-light" id="elemento">${orden.fecha}</td>
             <td><p class="text-light" id="elemento">${orden.hora}</td>
-            <td><p class="text-light" id="elemento">${orden.nombres}</td>
-            <td><p class="text-light" id="elemento">${orden.apellidos}</td>
-            <td>${mostrar(orden.orden)}</td>
+            <td><p class="text-light" id="elemento">${orden.ap}</td>
+            <td><p class="text-light" id="elemento">${orden.nombre}</td>
+            <td><p class="text-light" id="elemento">${orden.apellido}</td>
+            <td><p class="text-light" id="elemento">${orden.importes}</td>
+            <td><p class="text-light" id="elemento">${orden.tipo}</td>
             <td><p class="text-light" id="elemento">$${orden.total}</td>
-            <td><input type="button" class="btn btn-danger btn-sm" onclick="gestorOrdenes.eliminarRegistroOrden('${orden._id}');" value="Eliminar"></td>
+            <td><input type="button" class="btn btn-danger btn-sm" onclick="gestorImportes.eliminarImportes('${orden._id}');" value="Eliminar"></td>
         </tr>
         `;
     }
 
-    cargarRegistrosOrden() {
-        obtenerOrdenes((ordenes) => {
-            let html = ordenes.map(this.generarHtmlRegistroOrden).join('');
+    cargarImportes() {
+        console.log("cd");
+        obtenerImportes((importes) => {
+            let html = importes.map(this.generarHtmlImporte).join('');
 
-            this.registros.innerHTML = html;
+            this.Tblimportes.innerHTML = html;
         });
     }
 
-    eliminarRegistroOrden(id) {
-        eliminarOrden(id);
+    eliminarImportes(id) {
+        eliminarImporte(id);
 
-        this.cargarRegistrosOrden();
+        this.cargarImportes();
     }
 }
 
-function mostrar(params) {
-    let htmlc;
-    let htb = "";
-    let i = 0;
-    params.forEach(element => {
-            i = i + 1;
-            htmlc = `<li><div class="dropdown-item"><div class= "container w-25 fw-bold">${element.cantidades}x</div>${element.cantidad} ${element.categoria} de ${element.marca} ${element.mililitros}</div></li>`;
-            htb += htmlc; 
-    }); 
-    return `<div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      ${i} Productos
-    </button>
-    <ul class="dropdown-menu">
-   
-      ${htb}
-    </ul>
-  </div>`;
-}
 
 
-let gestorOrdenes = new GestorOrdenes();
+
+let gestorImportes = new GestorImportes();
