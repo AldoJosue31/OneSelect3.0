@@ -1,7 +1,9 @@
 var Datastore = require('nedb');
-var codigo
+let idGlobal;
 let nombres = document.getElementById('nombres');
 let apellidos = document.getElementById('apellidos');
+
+
  function getDateTime(global) {
     var now     = new Date(); 
     var year    = now.getFullYear();
@@ -36,7 +38,7 @@ const bd = new Datastore({
      autoload: true
     });
     
-function agregarOrden(nombres, apellidos, orden, total){
+function agregarOrden(nombres, apellidos, orden,gananciaTotal,ganancia, total){
     var pedido = {
         fecha: getDateTime(0),
         hora: new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds(),
@@ -44,7 +46,9 @@ function agregarOrden(nombres, apellidos, orden, total){
         nombres: nombres,
         apellidos: apellidos,
         orden: orden,
-        total : total,
+        gananciaTotal: gananciaTotal,
+        ganancia: ganancia,
+        total : total
     };
 
     bd.insert(pedido, function(error, nuevoObjeto){
@@ -158,7 +162,7 @@ class GestorOrdenes {
         this.agregarEventListeners();
         this.detectarOrg()
     }
-    generarTotalDeMes(ordene){
+    generarTotalDelDia(ordene){
         let totalC;
         totalC = 0;
         ordene.forEach(element => {
@@ -176,37 +180,68 @@ class GestorOrdenes {
                     if (ordenes.length > 0) {
                         this.registros.innerHTML = html;
                         this.notFound.innerHTML = "";
-                        this.TM.innerHTML = this.generarTotalDeMes(ordenes);
+                        this.TM.innerHTML = this.generarTotalDelDia(ordenes);
+                      
                         
                     } else {
-                        console.log("No hay nada we")
                         this.registros.innerHTML = html;
                         this.notFound.innerHTML = "<br>No se encontraron registros"
+                        this.TM.innerHTML = this.generarTotalDelDia(ordenes);
                     }
                  
                 });
                 break;
             case "Hora":
-                obtenerOrdenesHora((ordenes) => {
+                obtenerOrdenesFecha((ordenes) => {
                     let html = ordenes.map(this.generarHtmlRegistroOrden).join('');
-            
-                    this.registros.innerHTML = html;
-                });
-                break;
-            case "Nombre":
-                obtenerOrdenesNombre((ordenes) => {
-                     let html = ordenes.map(this.generarHtmlRegistroOrden).join('');
-                
-                     this.registros.innerHTML = html;
-                 });
-                break;
-            case "Apellido":
-               obtenerOrdenesApellidos((ordenes) => {
-                      let html = ordenes.map(this.generarHtmlRegistroOrden).join('');
                     
-                      this.registros.innerHTML = html;
-                  });
-                break;           
+                    if (ordenes.length > 0) {
+                        this.registros.innerHTML = html;
+                        this.notFound.innerHTML = "";
+                        this.TM.innerHTML = this.generarTotalDelDia(ordenes);
+                      
+                        
+                    } else {
+                        this.registros.innerHTML = html;
+                        this.notFound.innerHTML = "<br>No se encontraron registros"
+                        this.TM.innerHTML = this.generarTotalDelDia(ordenes);
+                    }
+                 
+                });
+            case "Nombre":
+                obtenerOrdenesFecha((ordenes) => {
+                    let html = ordenes.map(this.generarHtmlRegistroOrden).join('');
+                    
+                    if (ordenes.length > 0) {
+                        this.registros.innerHTML = html;
+                        this.notFound.innerHTML = "";
+                        this.TM.innerHTML = this.generarTotalDelDia(ordenes);
+                      
+                        
+                    } else {
+                        this.registros.innerHTML = html;
+                        this.notFound.innerHTML = "<br>No se encontraron registros"
+                        this.TM.innerHTML = this.generarTotalDelDia(ordenes);
+                    }
+                 
+                });
+            case "Apellido":
+                obtenerOrdenesFecha((ordenes) => {
+                    let html = ordenes.map(this.generarHtmlRegistroOrden).join('');
+                    
+                    if (ordenes.length > 0) {
+                        this.registros.innerHTML = html;
+                        this.notFound.innerHTML = "";
+                        this.TM.innerHTML = this.generarTotalDelDia(ordenes);
+                      
+                        
+                    } else {
+                        this.registros.innerHTML = html;
+                        this.notFound.innerHTML = "<br>No se encontraron registros"
+                        this.TM.innerHTML = this.generarTotalDelDia(ordenes);
+                    }
+                 
+                });     
         
             default:
                 break;
@@ -241,7 +276,7 @@ class GestorOrdenes {
                     document.getElementById('nombres').value == "???"
                     document.getElementById('apellidos').value == "???";
                }
-                agregarOrden(inNombres, inApellidos, Orden, RG);
+                agregarOrden(inNombres, inApellidos, Orden,RGg,(RG - RGg), RG);
                 eliminarAllCarProductos();
                Carrito.cargarCajaCarProducto();
         
@@ -269,11 +304,13 @@ class GestorOrdenes {
             <td><p class="text-light" id="elemento">${orden.nombres}</td>
             <td><p class="text-light" id="elemento">${orden.apellidos}</td>
             <td>${mostrar(orden.orden)}</td>
+            <td><p class="text-light" id="elemento">$${orden.ganancia.toFixed(2)}</td>
             <td><p class="text-light" id="elemento">$${orden.total}</td>
             <td><input type="button" class="btn btn-danger btn-sm" onclick="gestorOrdenes.eliminarRegistroOrden('${orden._id}');" value="Eliminar"></td>
         </tr>
         `;
     }
+ 
 
 
 

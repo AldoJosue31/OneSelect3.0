@@ -1,16 +1,23 @@
 let VT = document.getElementById('VT');
-let totalC = 0;
+let GT = document.getElementById('GT');
+let GV = document.getElementById('GV');
+let numVT = 0;
+let numGT = 0;
+let numGV = 0;
 
 bd.find({}, function(err, ordenes){
-    totalC = 0;
+    numVT = 0;
+    numGT = 0;
+    numGV = 0;
     ordenes.forEach(element => {
-        
-        totalC = totalC + Number(element.total);
+        numVT = numVT + Number(element.total);
+        numGT = numGT + Number(element.ganancia);
+        numGV = numGT + numVT;
     });
-
-    VT.innerHTML = totalC;
+    VT.innerHTML = numVT.toFixed(2);
+    GT.innerHTML = numGT.toFixed(2);
+    GV.innerHTML = numGV.toFixed(2);
     if (err) {
         console.error(err);
-        process.exit(0);
     }
 });

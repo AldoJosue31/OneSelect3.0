@@ -14,7 +14,8 @@
                              <th class="text-light">Categoria</th>
                              <th class="text-light">Marca</th>
                              <th class="text-light">Mililitros</th>
-                             <th class="text-light">Precio</th>
+                             <th class="text-light">Precio-agencia</th>
+                             <th class="text-light">Precio-cliente</th>
                              <th class="text-light">Acciones</th>
                         </tr>
                      </thead>
@@ -102,8 +103,13 @@
                 </div>
 
                 <div class="form-outline mb-2 form-floating mt-3" >
-                  <input type="number" id="precio" class="form-control mb-4 bg-dark text-light focus-light" placeholder="Precio" required/>
-                  <label for="floatingInputInvalid">Precio</label>
+                  <input type="number" step="any" id="precioAgencia" class="form-control mb-4 bg-dark text-light focus-light" placeholder="Precio"/>
+                  <label for="floatingInputInvalid">Precio de agencia</label>
+                 </div>
+
+                 <div class="form-outline mb-2 form-floating mt-3" >
+                  <input type="number" id="precioCliente" class="form-control mb-4 bg-dark text-light focus-light" placeholder="Precio" required/>
+                  <label for="floatingInputInvalid">Precio de cliente</label>
                  </div>
                 
 
@@ -113,6 +119,42 @@
                  <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     <button id="btnCrearProducto"  type="submit" class="btn btn-success">Crear</button>
+                  </div>
+
+              </form>
+        </div>
+ 
+      </div>
+    </div>
+    
+  </div>
+  <div class="modal fade" id="editarModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark text-light  border-light border">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Editar un producto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="mt-4" id="frmEditarProducto">
+
+              <div class="form-outline mb-2 form-floating mt-3" >
+                <input type="text" id="precioAgenciaNew" class="form-control mb-4 bg-dark text-light focus-light" placeholder="Precio" required/>
+                <label for="floatingInputInvalid">Precio de agencia</label>
+               </div>
+
+               <div class="form-outline mb-2 form-floating mt-3" >
+                <input type="text" id="precioClienteNew" class="form-control mb-4 bg-dark text-light focus-light" placeholder="Precio" required/>
+                <label for="floatingInputInvalid">Precio de cliente</label>
+               </div>
+                
+
+
+                 
+
+                 <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button id="btnEditarProducto" class="btn btn-success" onclick="Producto.editarTablaProducto()">Editar</button>
                   </div>
 
               </form>

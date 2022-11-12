@@ -1,6 +1,6 @@
 var Datastore = require('nedb');
 let inputMili = document.getElementById('descripcion');
-
+let cod;
 
 
 let dba = new Datastore({
@@ -10,13 +10,14 @@ let dba = new Datastore({
 
 
 
-    function agregarProducto(cantidad,categoria,marca,mililitros,precio, color){
+    function agregarProducto(cantidad,categoria,marca,mililitros,precioAgencia,precioCliente, color){
         var producto = {
             cantidad: cantidad,
             categoria: categoria,
             marca: marca,
             mililitros: mililitros,
-            precio: precio,
+            precioAgencia: precioAgencia,
+            precioCliente: precioCliente,
             color: color,
             cantidades: 1
         };
@@ -25,6 +26,11 @@ let dba = new Datastore({
     
         });
     };
+    function editarProducto(id,precioAgenciaNew,precioClienteNew){
+        dba.update({_id: id}, {$set: {precioAgencia: precioAgenciaNew,precioCliente:precioClienteNew}}, {}, function(err, num) {
+
+        });
+    }
     function obtenerProductos(operacion) {
         dba.find({}).sort({marca:1}).exec(function(err, productos) {
             if(productos){
@@ -50,7 +56,10 @@ let dba = new Datastore({
 
 class GestorProductos {
     constructor() {
+        this.codigo;
+
         this.frmNuevoProducto = document.getElementById('frmNuevoProducto');
+        this.frmEditarProducto = document.getElementById('frmEditarProducto');
 
         this.SecProductos = document.getElementById('SecProductos');
         this.productosTabla = document.getElementById('productosTabla');
@@ -58,10 +67,16 @@ class GestorProductos {
 
 
         this.precio = document.getElementById('precio');
+        this.precioAgencia = document.getElementById('precioAgencia');
+        this.precioCliente = document.getElementById('precioCliente');
         this.mililitros = document.getElementById('descripcion');
+
+        this.precioClienteNew = document.getElementById('precioClienteNew');
+        this.precioAgenciaNew = document.getElementById('precioAgenciaNew');
 
 
         this.btnCrearProducto = document.getElementById('btnCrearProducto'); 
+        this.btnEditarProducto = document.getElementById('btnEditarProducto');
 
         this.cargarCajaProducto();
         this.cargarTablaroducto();
@@ -144,9 +159,10 @@ class GestorProductos {
             default:
                 break;
         }
-        agregarProducto(cantidad,categoria,marca,this.mililitros.value, this.precio.value,color);
+        agregarProducto(cantidad,categoria,marca,this.mililitros.value, this.precioAgencia.value,this.precioCliente.value,color);
 
-        this.precio.value = '';
+        this.precioAgencia.value = '';
+        this.precioCliente.value = '';
         this.mililitros.value = '';
         document.getElementById('select1').options[document.getElementById('select1').selectedIndex = 0];
         document.getElementById('cantidad').options[document.getElementById('cantidad').selectedIndex = 0];
@@ -169,10 +185,10 @@ class GestorProductos {
        >
         <div class="card bg-dark text-light" style="${producto.color}">
           <div class="card-body">
-          <h5 class="card-title font-weight-bold">${producto.categoria}</h5>
+          <h5 class="card-title font-weight-bold">${producto.cantidad}  ${producto.categoria}</h5>
             <br>
             <h5 class="card-title font-weight-bold">${producto.marca}</h5>
-            <h7>$${producto.precio}</h7>
+            <h7>$${producto.precioCliente}</h7>
             <br>
             <br>
             <a class="btn btn-primary"onclick="crearCajaCarProducto('${producto._id}')">Agregar</a>
@@ -197,8 +213,13 @@ class GestorProductos {
         <td><p class="text-light">${producto.categoria}</td>
         <td><p class="text-light">${producto.marca}</td>
         <td><p class="text-light">${producto.mililitros} ml</td>
-        <td><p class="text-light">$${producto.precio}</td>
-        <td><input type="button" class="btn btn-danger btn-sm" onclick="Producto.eliminarCajaProducto('${producto._id}');" value="Eliminar"></td>
+        <td><p class="text-light">$${producto.precioAgencia}</td>
+        <td><p class="text-light">$${producto.precioCliente}</td>
+        <td>
+        <input type="button" class="btn btn-secondary btn-sm" onclick="Producto.seleccionarProducto('${producto._id}');" data-bs-toggle="modal" data-bs-target="#editarModal"  value="Editar">
+         <input type="button" class="btn btn-danger btn-sm" onclick="Producto.eliminarCajaProducto('${producto._id}');" value="Eliminar">
+        
+        </td>
     </tr>
         `;
     }
@@ -211,8 +232,18 @@ class GestorProductos {
         });
     }
 
+    seleccionarProducto(id){
+        console.log(id)
+        cod = id;
+        console.log(cod)
+    }
 
-
+    editarTablaProducto(){
+       
+        editarProducto(cod,this.precioAgenciaNew.value,this.precioClienteNew.value)
+        this.precioAgenciaNew.value == "";
+        this.precioClienteNew.value == "";
+    }
 
 
     eliminarCajaProducto(id) {

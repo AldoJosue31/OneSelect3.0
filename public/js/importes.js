@@ -1,60 +1,8 @@
 var Datastore = require('nedb');
-function init() {
+
+
  
- 
-    let options = [
-        {
-            value: "1",
-            text: "Cuarto"
-        },
-        {
-            value: "2",
-            text: "Media"
-        },
-        {
-            value: "3",
-            text: "Mega"
-        },
-        {
-            value: "4",
-            text: "Familiar"
-        }
-    ];
- 
- 
- 
-    let select = createSELECT(options);
- 
-    document.body.appendChild(select);
- 
-}
- 
-function createSELECT(options) {
- 
-    let select = document.getElementById('imp_categoria');
-    if (options && Array.isArray(options)) {
-        for (let index = 0; index < options.length; index++) {
-            const element = options[index];
- 
-            let option = document.createElement("option");
- 
-            if (element.value) {
-                option.setAttribute("value", element.value);
-            }
-            if (element.text) {
-                let optionText = document.createTextNode(element.text);
-                option.appendChild(optionText);
-            }
- 
-            select.appendChild(option);
-        }
-    }
- 
-    return select;
-}
- 
- 
-window.onload = init;
+
 
 document.getElementById('Imp').addEventListener('click', function() {
 

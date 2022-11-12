@@ -1,7 +1,8 @@
 var Datastore = require('nedb');
 let resultado = 0;
+let resultado2 = 0;
 let arreglo = [];
-let RG;
+let RG,RGg;
 
 obtenerProductos((productos) => {
     productos.map(function(num) {;
@@ -70,13 +71,16 @@ const carrito = new Datastore({
     let arreglo2 =  arreglo.filter(element => element._id == iden);
           carrito.insert(arreglo2, function(error, nuevoObjeto){
             if (error) {
-                console.error(error);
+                carrito.update({_id: iden}, {$inc: {cantidades: +1}}, {}, function(err, num) {
+                });
+                Carrito.generarTotal();
+                Carrito.cargarCajaCarProducto();
             }else{
                 Carrito.cargarCajaCarProducto();
                 Carrito.generarTotal();
-                console.log(document.getElementById(`"${nuevoObjeto[0]._id}"`).classList)
-                document.getElementById(`"${nuevoObjeto[0]._id}"`).classList.remove('eliminacionAnimada')
-                setTimeout(() => document.getElementById(`"${nuevoObjeto[0]._id}"`).classList.add('eliminacionAnimada'), 1)
+                let doc = document.getElementsByClassName(`${nuevoObjeto[0]._id}`)[0];
+                console.log(doc);
+             
             }
         });
          
@@ -110,7 +114,7 @@ class GestorCarrito {
        });
         this.cargarCajaCarProducto();
         document.getElementById('TextoTotal').innerHTML = "0";
-            this.bg.classList.remove('cajaAnimada')
+         this.bg.classList.remove('cajaAnimada')
             setTimeout(() => this.bg.classList.add('cajaAnimada'), 1)
  
         
@@ -119,11 +123,14 @@ class GestorCarrito {
     generarTotal() {
         obtenerCarProductos((elemento) => {
             elemento.forEach(element => {
-                resultado = resultado + (Number(element.precio) * element.cantidades);
+                resultado = resultado + (Number(element.precioCliente) * element.cantidades);
+                resultado2 = resultado2 + (Number(element.precioAgencia) * element.cantidades);
             });
             document.getElementById('TextoTotal').innerHTML = resultado;
             RG = resultado;
+            RGg = resultado2;
             resultado = 0;
+            resultado2 = 0;
         });
     }
 
@@ -132,7 +139,7 @@ class GestorCarrito {
     }
 
     generarHtmlCajaCarProducto(carProducto){
-        return `<div id="${carProducto._id}">
+        return `<div class="${carProducto._id}">
     <div class="container text-light border border-2 border-light  border-start-0  border-stop-0 mt-4" >
   <div class="row">
     <div class="col-2 ">
@@ -144,7 +151,7 @@ class GestorCarrito {
     </div>
     <div class="col border-start border-end" style="${carProducto.color}">
     <h5>${carProducto.cantidad}<br> ${carProducto.marca} ${carProducto.mililitros} ml</h5>
-        <h4>$${carProducto.precio}</h4>
+        <h4>$${carProducto.precioCliente}</h4>
     </div>
     <div class="col-2">
     <div class="row row-cols-1 h-100">
@@ -176,3 +183,4 @@ class GestorCarrito {
 
 
 let Carrito = new GestorCarrito();
+
